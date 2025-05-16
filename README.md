@@ -1,7 +1,7 @@
 
 # Dataset Creation Pipeline
 
-![Pipeline Image](Imgs/pipeline1.png)
+![Pipeline Image](Imgs/pipeline.png)
 
 ## Introduction
 
@@ -80,7 +80,7 @@ By following the steps outlined above, you will have a complete dataset ready fo
 
 ### Additional Utilities
 
-#### `Utils/3Dgenerate.py`: Generate 3D Point Cloud Visualization from RGB-DEM Pairs
+#### 1.  `Utils/3Dgenerate.py`: Generate 3D Point Cloud Visualization from RGB-DEM Pairs
 
 This script allows you to generate 3D point cloud visualizations from RGB-DEM pairs. It helps in converting the depth information from the DEM files into a 3D representation, which can be useful for visually inspecting the dataset and understanding the spatial structure of the data.
 
@@ -92,7 +92,7 @@ python Utils/3Dgenerate.py
 
 This will create a 3D point cloud visualization from the RGB and DEM images in the dataset.
 
-#### `Utils/checkDatasetUI-New.py`: Visualize Multiple Image Dataset
+#### 2. `Utils/checkDatasetUI-New.py`: Visualize Multiple Image Dataset
 
 This script provides an interactive user interface for viewing multiple images within the dataset. It supports mouse and keyboard navigation (using `WASD` for up/down movement and zooming for closer inspection of individual pixels). Additionally, it allows you to quickly skip images and view the original depth map information associated with the images.
 
@@ -104,7 +104,9 @@ python Utils/checkDatasetUI-New.py
 
 This tool will be helpful for manually inspecting the dataset to identify any issues or anomalies in the images or depth maps.
 
-#### `Utils/convertDepth2Color.py`: Convert Grayscale Depth Maps to Color Depth Maps
+#### 3. `Utils/convertDepth2Color.py`: Convert Grayscale Depth Maps to Color Depth Maps
+
+![Dataset View](Imgs/UI.png)
 
 This utility script can convert single-channel grayscale depth maps into colorized depth maps. The color mapping helps in better visualizing depth variations, making it easier to analyze the depth information in the dataset.
 
@@ -115,8 +117,3 @@ python Utils/convertDepth2Color.py
 ```
 
 This will generate colorized depth maps from the original grayscale depth maps, which can be useful for visual inspection or for tasks requiring color-depth information.
-
-```
-
-This addition should provide users with a clear understanding of the additional utilities available in your pipeline, including how to run and what each utility does.
-```
