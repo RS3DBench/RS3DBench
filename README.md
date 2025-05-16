@@ -13,7 +13,7 @@ Furthermore, we introduce a remotely sensed depth estimation model derived from 
 
 ### 1. Download DEM Data
 
-First, download the corresponding DEM dataset from sources like the Alos 3D DEM website. After downloading, place the DEM dataset in the root directory and rename it to `DataDEM-{targetAreaName}`, where `{targetAreaName}` is the name of your target geographical area.
+First, download the corresponding DEM dataset from sources like the Alos 3D DEM website. After downloading, place the DEM dataset in the root directory and rename it to `DataDEM-{targetAreaName}`, where `{targetAreaName}` is the name of your target geographical area (Or whatever you want to call it).
 
 ### 2. Run `Dataset-multiProcess.py`
 
@@ -28,8 +28,8 @@ Make sure to set up your own GEE project and configure the proxy settings accord
 
 The script will first read and crop the DEM files from `DataDEM-{targetAreaName}/` into smaller DEM tiles, which are stored in `preSplitDEM-{targetAreaName}`. It will then assign tasks to each thread based on the number of DEM tiles in `preSplitDEM-{targetAreaName}`. During the RGB data download, the script will create several folders in the root directory corresponding to the number of threads, including:
 
-- `preSplitImages-{targetAreaName}`: Contains the downloaded RGB files.
-- `DEM-{targetAreaName}`: Contains the cropped DEM files.
+- `preSplitImages-{targetAreaName}_{thread_id}`: Contains the downloaded RGB files.
+- `DEM-{targetAreaName}_{thread_id}`: Contains the cropped DEM files.
 - `Image/tif-{targetAreaName}_{thread_id}`: Contains the cropped TIF files.
 
 Once the download is complete, run the `moveImgToTargetDir.py` script to move the images from the temporary folders to the final directories and remove the temporary folders. Ensure you configure the `thread_num` and `targetAreaName` parameters.
@@ -71,7 +71,52 @@ Upon successful completion of all the steps, you will have the following dataset
 * `DEM-{targetAreaName}` (Original DEM files)
 * `DEM_255-{targetAreaName}` (Normalized DEM files)
 
-## Conclusion
+## Final Result
+
+![Dataset View](Imgs/picture1.png)
 
 By following the steps outlined above, you will have a complete dataset ready for training and evaluation of 3D visual perception models in remote sensing applications. This pipeline ensures that the dataset is properly processed and formatted for use with large-scale 3D vision models.
 
+
+### Additional Utilities
+
+#### `Utils/3Dgenerate.py`: Generate 3D Point Cloud Visualization from RGB-DEM Pairs
+
+This script allows you to generate 3D point cloud visualizations from RGB-DEM pairs. It helps in converting the depth information from the DEM files into a 3D representation, which can be useful for visually inspecting the dataset and understanding the spatial structure of the data.
+
+To run this script, use:
+
+```bash
+python Utils/3Dgenerate.py
+````
+
+This will create a 3D point cloud visualization from the RGB and DEM images in the dataset.
+
+#### `Utils/checkDatasetUI-New.py`: Visualize Multiple Image Dataset
+
+This script provides an interactive user interface for viewing multiple images within the dataset. It supports mouse and keyboard navigation (using `WASD` for up/down movement and zooming for closer inspection of individual pixels). Additionally, it allows you to quickly skip images and view the original depth map information associated with the images.
+
+To run this script, use:
+
+```bash
+python Utils/checkDatasetUI-New.py
+```
+
+This tool will be helpful for manually inspecting the dataset to identify any issues or anomalies in the images or depth maps.
+
+#### `Utils/convertDepth2Color.py`: Convert Grayscale Depth Maps to Color Depth Maps
+
+This utility script can convert single-channel grayscale depth maps into colorized depth maps. The color mapping helps in better visualizing depth variations, making it easier to analyze the depth information in the dataset.
+
+To run this script, use:
+
+```bash
+python Utils/convertDepth2Color.py
+```
+
+This will generate colorized depth maps from the original grayscale depth maps, which can be useful for visual inspection or for tasks requiring color-depth information.
+
+```
+
+This addition should provide users with a clear understanding of the additional utilities available in your pipeline, including how to run and what each utility does.
+```
