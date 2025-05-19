@@ -5,9 +5,7 @@
 
 ## Introduction
 
-We introduce a novel benchmark designed to propel the advancement of general-purpose, large-scale 3D vision models for remote sensing imagery. This dataset encompasses 54,951 pairs of remote sensing images and pixel-level aligned depth maps, accompanied by corresponding textual descriptions, spanning a broad array of geographical contexts. It serves as a tool for training and assessing 3D visual perception models within remote sensing image spatial understanding tasks. 
-
-Furthermore, we introduce a remotely sensed depth estimation model derived from stable diffusion, harnessing its multimodal fusion capabilities, thereby delivering state-of-the-art performance on our dataset. Our endeavor seeks to make a profound contribution to the evolution of 3D visual perception models and the advancement of geographic artificial intelligence within the remote sensing domain.
+We introduce a novel benchmark designed to propel the advancement of general-purpose, large-scale 3D vision models for remote sensing imagery. This dataset encompasses 54,951 pairs of remote sensing images and pixel-level aligned depth maps, accompanied by corresponding textual descriptions, spanning a broad array of geographical contexts. It serves as a tool for training and assessing 3D visual perception models within remote sensing image spatial understanding tasks.
 
 ## Dataset Download and Processing Workflow
 
@@ -73,14 +71,14 @@ Upon successful completion of all the steps, you will have the following dataset
 
 ## Final Result
 
-![Dataset View](Imgs/picture1.png)
+![Dataset View1](Imgs/picture1.png)
 
 By following the steps outlined above, you will have a complete dataset ready for training and evaluation of 3D visual perception models in remote sensing applications. This pipeline ensures that the dataset is properly processed and formatted for use with large-scale 3D vision models.
 
 
-### Additional Utilities
+## Additional Utilities
 
-#### 1.  `Utils/3Dgenerate.py`: Generate 3D Point Cloud Visualization from RGB-DEM Pairs
+### 1.  `Utils/3Dgenerate.py`: Generate 3D Point Cloud Visualization from RGB-DEM Pairs
 
 This script allows you to generate 3D point cloud visualizations from RGB-DEM pairs. It helps in converting the depth information from the DEM files into a 3D representation, which can be useful for visually inspecting the dataset and understanding the spatial structure of the data.
 
@@ -90,13 +88,19 @@ To run this script, use:
 python Utils/3Dgenerate.py
 ````
 
-This will create a 3D point cloud visualization from the RGB and DEM images in the dataset.
+This will create a 3D point cloud visualization from the RGB and DEM images in the dataset, as shown in the above figure.
 
-#### 2. `Utils/checkDatasetUI-New.py`: Visualize Multiple Image Dataset
+### 2. `Utils/checkDatasetUI-New.py`: Visualize Multiple Image Dataset
 
-This script provides an interactive user interface for viewing multiple images within the dataset. It supports mouse and keyboard navigation (using `WASD` for up/down movement and zooming for closer inspection of individual pixels). Additionally, it allows you to quickly skip images and view the original depth map information associated with the images.
+![Dataset View2](Imgs/UI.png)
 
-To run this script, use:
+This script provides an interactive user interface for viewing multiple images in the dataset. 
+* It supports using WASD and the up, down, left and right buttons to move the distance of a single pixel.
+* It comes with a built-in zoom box, allowing you to check each pixel more carefully and whether each group of pictures is aligned.
+* It also allows you to quickly skip images and view multiple groups of images (configured via the 'folder_paths' variable in the code).
+* For the convenience of visualization, it will automatically normalize single-channel images and three identical channel images within the range of 0 to 255, but the original depth values will still be displayed on the UI.
+
+2k screens or higher are recommended for better visualization. To run this script, use:
 
 ```bash
 python Utils/checkDatasetUI-New.py
@@ -104,9 +108,7 @@ python Utils/checkDatasetUI-New.py
 
 This tool will be helpful for manually inspecting the dataset to identify any issues or anomalies in the images or depth maps.
 
-#### 3. `Utils/convertDepth2Color.py`: Convert Grayscale Depth Maps to Color Depth Maps
-
-![Dataset View](Imgs/UI.png)
+### 3. `Utils/convertDepth2Color.py`: Convert Grayscale Depth Maps to Color Depth Maps
 
 This utility script can convert single-channel grayscale depth maps into colorized depth maps. The color mapping helps in better visualizing depth variations, making it easier to analyze the depth information in the dataset.
 
@@ -115,5 +117,7 @@ To run this script, use:
 ```bash
 python Utils/convertDepth2Color.py
 ```
+
+<img src="Imgs/gray-color.png" width="500px" />
 
 This will generate colorized depth maps from the original grayscale depth maps, which can be useful for visual inspection or for tasks requiring color-depth information.
